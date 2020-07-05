@@ -1,4 +1,5 @@
 import java.io.*;
+import java.text.ParseException;
 import java.util.StringTokenizer;
 
 /**
@@ -19,15 +20,22 @@ public class Main {
             stdErr.println("读入错误");
         }catch (InterruptedException e){
             stdErr.println("Time wrong");
+        }catch (ParseException e){
+            stdErr.println("日期转换错误");
         }
     }
 
-    Main() throws IOException, InterruptedException {
+    Main() throws IOException, InterruptedException, ParseException {
         this.company = new Company();
         run();
     }
 
     public void run() throws IOException, InterruptedException {
+        /*
+         * 功能描述: 主运行方法
+         * @Param: []
+         * @Return: void
+         */
         int choice = getChoice();
         while (choice!= 0) {
             if(choice == 1){
@@ -35,8 +43,9 @@ public class Main {
                 String id = stdIn.readLine();
                 System.out.println("请输入密码:");
                 String password = stdIn.readLine();
+                //先登录
                 if(company.logIn(id,password)){
-                    company.signIn(id);
+                    company.signIn(id);//调用签到方法
                 }else {
                     System.out.println("签到失败!");
                 }
@@ -45,8 +54,9 @@ public class Main {
                 String id = stdIn.readLine();
                 System.out.println("请输入密码:");
                 String password = stdIn.readLine();
+                //先登录
                 if (company.logIn(id,password)) {
-                    company.signBack(id);
+                    company.signBack(id);//调用签退方法
                 }else {
                     System.out.println("签退失败!");
                 }
@@ -56,7 +66,25 @@ public class Main {
                 stdErr.println("[2]--------------历史记录");
                 stdErr.println("[3]--------------个人记录");
                 int i = Integer.parseInt(stdIn.readLine());
-                company.showSighInfo();
+                switch (i){
+                    case 1:{
+                        company.showSighInfo();
+                        break;
+                    }
+                    case 2:{
+                        company.history();
+                        break;
+                    }
+                    case 3:{
+                        System.out.println("请输入ID:");
+                        String id = stdIn.readLine();
+                        company.personalSignInfo(id);
+                        break;
+                    }
+                    default:
+                        break;
+                }
+
             }else if(choice == 4){
                 company.showAllEmployee();
             }else if(choice == 5){
@@ -77,13 +105,14 @@ public class Main {
                 String id = stdIn.readLine();
                 System.out.println("请输入密码:");
                 String password = stdIn.readLine();
+                //先登录
                 if (company.logIn(id,password)){
                     System.out.println("请输入新密码:");
                     String code = stdIn.readLine();
                     Employee employee = company.search(id);
-                    company.deleteEmployee(employee);
+                    company.deleteEmployee(employee);//删除旧员工信息
                     employee.setPassword(code);
-                    company.writeEmployee(employee);
+                    company.writeEmployee(employee);//添加新员工信息
                     System.out.println("密码修改成功!");
                 }else {
                     System.out.println("密码修改失败!");
@@ -96,6 +125,11 @@ public class Main {
     }
 
     public int getChoice() throws IOException {
+        /*
+         * 功能描述: 选择要执行的功能
+         * @Param: [void]
+         * @Return: int
+         */
         int in;
         while (true) {
             stdErr.println("----员工打卡系统----");

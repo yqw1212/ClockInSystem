@@ -25,7 +25,7 @@
     <property name="settings.editor.selected.configurable" value="editing.templates" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
-  <component name="RunManager" selected="Application.Test">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="ClockInfo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ClockInfo" />
       <module name="ClockIn" />
@@ -49,8 +49,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Test" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Test" />
         <item itemvalue="Application.ClockInfo" />
       </list>
     </recent_temporary>
@@ -69,18 +69,18 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="357" y="194" key="#com.intellij.codeInsight.template.impl.EditVariableDialog" timestamp="1593759657444">
+    <state x="357" y="194" key="#com.intellij.codeInsight.template.impl.EditVariableDialog" timestamp="1593844564523">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="357" y="194" key="#com.intellij.codeInsight.template.impl.EditVariableDialog/0.0.1280.680@0.0.1280.680" timestamp="1593759657444" />
+    <state x="357" y="194" key="#com.intellij.codeInsight.template.impl.EditVariableDialog/0.0.1280.680@0.0.1280.680" timestamp="1593844564523" />
     <state x="367" y="143" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1593692898108">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="367" y="143" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.680@0.0.1280.680" timestamp="1593692898108" />
-    <state x="446" y="42" key="#com.intellij.ide.util.MemberChooser" timestamp="1593830382739">
+    <state x="446" y="42" key="#com.intellij.ide.util.MemberChooser" timestamp="1593838560728">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="446" y="42" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1593830382739" />
+    <state x="446" y="42" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1593838560728" />
     <state x="210" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1593702007495">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -89,22 +89,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1593699596405" />
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1593833015019">
+    <state width="1237" height="71" key="GridCell.Tab.0.bottom" timestamp="1593915524962">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1593833015019" />
-    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1593833015019">
+    <state width="1237" height="71" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1593915524962" />
+    <state width="1237" height="71" key="GridCell.Tab.0.center" timestamp="1593915524962">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1593833015019" />
-    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1593833015019">
+    <state width="1237" height="71" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1593915524962" />
+    <state width="1237" height="71" key="GridCell.Tab.0.left" timestamp="1593915524962">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1593833015019" />
-    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1593833015019">
+    <state width="1237" height="71" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1593915524962" />
+    <state width="1237" height="71" key="GridCell.Tab.0.right" timestamp="1593915524962">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1593833015019" />
+    <state width="1237" height="71" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1593915524962" />
     <state width="1237" height="204" key="GridCell.Tab.1.bottom" timestamp="1593702045517">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -121,14 +121,14 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1237" height="204" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1593702045517" />
-    <state x="142" y="0" key="SettingsEditor" timestamp="1593759863856">
+    <state x="142" y="0" key="SettingsEditor" timestamp="1593844565971">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1593759863856" />
-    <state x="325" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1593824662932">
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1593844565971" />
+    <state x="325" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1593911588829">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="325" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1593824662932" />
+    <state x="325" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1593911588829" />
     <state x="28" y="0" key="new project wizard" timestamp="1593688408723">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
