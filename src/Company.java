@@ -73,7 +73,7 @@ public class Company {
         for(Employee employee : allEmployee){
             int flag = 0;
             for(ClockInfo d : allInfo){
-                if(d.getId().equals(employee.getId()) && d.getIn().getDay()==new Date().getDay() &&
+                if(d.getId().equals(employee.getId()) && d.getIn().getDate()==new Date().getDate() &&
                         d.getIn().getMonth() == new Date().getMonth() && d.getIn().getYear()== new Date().getYear()){
                     System.out.print(employee.getName()+"--签到:"+d.getIn());
                     if(d.getBack()==null){
@@ -109,7 +109,7 @@ public class Company {
             }
         }else {
             for(ClockInfo d : onePersonInfos){
-                if(d.getIn().getDay()==new Date().getDay() && d.getIn().getMonth() == new Date().getMonth()
+                if(d.getIn().getDate()==new Date().getDate() && d.getIn().getMonth() == new Date().getMonth()
                         && d.getIn().getYear()== new Date().getYear()){
                     if(d.getBack() == null){
                         d.setBack();//调用签退方法
@@ -151,7 +151,7 @@ public class Company {
             }
         }else{
             for(ClockInfo d : onePersonInfos){
-                if(d.getIn().getDay()==new Date().getDay() && d.getIn().getMonth() == new Date().getMonth()
+                if(d.getIn().getDate()==new Date().getDate() && d.getIn().getMonth() == new Date().getMonth()
                         && d.getIn().getYear()== new Date().getYear()){
                     System.err.println("今天已经打过卡了");
                     //不能重复签到
