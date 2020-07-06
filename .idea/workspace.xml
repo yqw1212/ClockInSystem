@@ -5,6 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/employees.dat" beforeDir="false" afterPath="$PROJECT_DIR$/data/employees.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/signInfo.dat" beforeDir="false" afterPath="$PROJECT_DIR$/data/signInfo.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ClockIn/Company.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ClockIn/Company.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Company.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Company.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,22 +116,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1593699596405" />
-    <state width="1237" height="137" key="GridCell.Tab.0.bottom" timestamp="1594035848763">
+    <state width="1237" height="137" key="GridCell.Tab.0.bottom" timestamp="1594041265096">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="137" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1594035848763" />
-    <state width="1237" height="137" key="GridCell.Tab.0.center" timestamp="1594035848763">
+    <state width="1237" height="137" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1594041265096" />
+    <state width="1237" height="137" key="GridCell.Tab.0.center" timestamp="1594041265096">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="137" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1594035848763" />
-    <state width="1237" height="137" key="GridCell.Tab.0.left" timestamp="1594035848763">
+    <state width="1237" height="137" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1594041265096" />
+    <state width="1237" height="137" key="GridCell.Tab.0.left" timestamp="1594041265096">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="137" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1594035848763" />
-    <state width="1237" height="137" key="GridCell.Tab.0.right" timestamp="1594035848763">
+    <state width="1237" height="137" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1594041265096" />
+    <state width="1237" height="137" key="GridCell.Tab.0.right" timestamp="1594041265096">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="137" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1594035848763" />
+    <state width="1237" height="137" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1594041265096" />
     <state width="1237" height="204" key="GridCell.Tab.1.bottom" timestamp="1594014530627">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -150,10 +152,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1593844565971" />
-    <state x="325" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1594035445037">
+    <state x="325" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1594040304748">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="325" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1594035445037" />
+    <state x="325" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1594040304748" />
     <state x="28" y="0" key="new project wizard" timestamp="1593688408723">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

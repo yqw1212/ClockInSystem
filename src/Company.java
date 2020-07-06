@@ -139,10 +139,10 @@ public class Company {
                     if(d.getBack() == null){
                         d.setBack();//调用签退方法
                         System.out.println("卡号："+id+",签退成功! "+d.getBack());
-                        if (Integer.parseInt(d.getBack().getHours()+""+d.getBack().getMinutes()) >= ini_backTime ) {
+                        if ((d.getBack().getHours()*60 + d.getBack().getMinutes()) >= ini_backTime ) {
                             this.transmit(d);
                         }else {
-                            int minutes = ini_backTime-Integer.parseInt(d.getBack().getHours()+""+d.getBack().getMinutes());
+                            int minutes = d.getBack().getHours()*60 + d.getBack().getMinutes() - ini_backTime;
                             System.out.println("您已早退" + minutes/60 + "小时" + minutes%60 + "分钟");
                         }
                     }else {
@@ -150,10 +150,10 @@ public class Company {
                             //判断两次打卡时间间隔是否小于一分钟
                             d.setBack();//调用签退方法
                             System.out.println("卡号："+id+",签退成功! "+d.getBack());
-                            if (Integer.parseInt(d.getBack().getHours()+""+d.getBack().getMinutes()) >= ini_backTime){
+                            if ((d.getBack().getHours()*60 + d.getBack().getMinutes()) >= ini_backTime){
                                 this.transmit(d);
                             }else {
-                                int minutes = ini_backTime-Integer.parseInt(d.getBack().getHours()+""+d.getBack().getMinutes());
+                                int minutes = d.getBack().getHours()*60 + d.getBack().getMinutes() - ini_backTime;
                                 System.out.println("您已早退" + minutes/60 + "小时" + minutes%60 + "分钟");
                             }
                         }else {
@@ -183,10 +183,10 @@ public class Company {
                 allInfo.add(clockInfo);//打卡信息加入信息集合
 //                search(id).addCount();
                 System.out.println("卡号："+id+",打卡成功!"+ clockInfo.getIn());
-                if(Integer.parseInt(clockInfo.getIn().getHours()+""+clockInfo.getIn().getMinutes()) <= ini_inTime){
+                if((clockInfo.getIn().getHours()*60 + clockInfo.getIn().getMinutes()) <= ini_inTime){
                     transmit(clockInfo);
                 }else{
-                    int minutes = Integer.parseInt(clockInfo.getIn().getHours()+""+clockInfo.getIn().getMinutes())-ini_inTime;
+                    int minutes = clockInfo.getIn().getHours()*60 + clockInfo.getIn().getMinutes() - ini_inTime;
                     System.out.println("您已迟到" + minutes/60 + "小时" + minutes%60 + "分钟");
                 }
             }else {
@@ -205,10 +205,10 @@ public class Company {
             allInfo.add(clockInfo);//打卡信息加入信息集合
 //            search(id).addCount();
             System.out.println("卡号：" + id + ",打卡成功!" + clockInfo.getIn());
-            if(Integer.parseInt(clockInfo.getIn().getHours()+""+clockInfo.getIn().getMinutes()) <= ini_inTime){
+            if((clockInfo.getIn().getHours()*60 + clockInfo.getIn().getMinutes()) <= ini_inTime){
                 transmit(clockInfo);
             }else{
-                int minutes = Integer.parseInt(clockInfo.getIn().getHours()+""+clockInfo.getIn().getMinutes())-ini_inTime;
+                int minutes = clockInfo.getIn().getHours()*60 + clockInfo.getIn().getMinutes() - ini_inTime;
                 System.out.println("您已迟到" + minutes/60 + "小时" + minutes%60 + "分钟");
             }
         }
@@ -398,13 +398,13 @@ public class Company {
          */
         System.out.println("设置公司最迟签到时间,格式为: hh:mm");
         String s = stdIn.readLine();
-        s = s.replace(":","");
-        this.ini_inTime = Integer.parseInt(s);
+        StringTokenizer sTokenizer = new StringTokenizer(s,":");
+        this.ini_inTime = Integer.parseInt(sTokenizer.nextToken())*60 + Integer.parseInt(sTokenizer.nextToken());
 
         System.out.println("设置公司最早签退时间,格式为: hh:mm");
         s = stdIn.readLine();
-        s = s.replace(":","");
-        this.ini_backTime = Integer.parseInt(s);
+        sTokenizer = new StringTokenizer(s, ":");
+        this.ini_backTime = Integer.parseInt(sTokenizer.nextToken())*60 + Integer.parseInt(sTokenizer.nextToken());
 
         BufferedReader bufferedReader = new BufferedReader(
                 new InputStreamReader(new FileInputStream("data/employees.dat")));
