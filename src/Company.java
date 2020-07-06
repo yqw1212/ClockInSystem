@@ -25,7 +25,7 @@ public class Company {
          * @Return: Company
          */
         if (company == null){
-            company = new Company();
+            ini();
         }
         return company;
     }
@@ -421,5 +421,10 @@ public class Company {
 //        this.addEmployee(new Employee("D001","小刚"));
 //        this.addEmployee(new Employee("E001","冰冰"));
         bufferedReader.close();//关闭文件
+    }
+    private synchronized static void ini() throws IOException, ParseException {
+        if(company == null){
+            company = new Company();
+        }
     }
 }
