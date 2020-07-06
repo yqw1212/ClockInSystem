@@ -14,11 +14,21 @@ public class Human implements Department {
 
     @Override
     public void addClockInfo(ClockInfo clockInfo) {
+        /*
+         * 功能描述: 添加打卡信息类
+         * @Param: [clockInfo]
+         * @Return: void
+         */
         this.allInfo.add(clockInfo);
     }
 
     @Override
     public void showClockInfo() {
+        /*
+         * 功能描述: 展示打卡信息
+         * @Param: []
+         * @Return: void
+         */
         for (ClockInfo clockInfo : allInfo){
             System.out.println(clockInfo);
         }

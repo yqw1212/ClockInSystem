@@ -23,6 +23,7 @@ public class Company {
          * 功能描述: 单例模式
          * @Param: []
          * @Return: Company
+         * @throws: IOException, ParseException
          */
         if (company == null){
             ini();
@@ -31,6 +32,12 @@ public class Company {
     }
 
     private Company() throws IOException, ParseException {
+        /*
+         * 功能描述: 构造方法
+         * @Param: []
+         * @Return:
+         * @throws: IOException, ParseException
+         */
         this.departments = new LinkedList<Department>();
         this.addDepartment(new Logistics());
         this.addDepartment(new Human());
@@ -166,7 +173,7 @@ public class Company {
         ClockInfo clockInfo = new ClockInfo(id);
 
         ArrayList<ClockInfo> onePersonInfos = this.onlyEmployee(id);
-        if (onePersonInfos==null) {
+        if (onePersonInfos == null) {
             if(search(id) != null) {
                 clockInfo.setIn();//调用签到方法
                 allInfo.add(clockInfo);//打卡信息加入信息集合
@@ -336,18 +343,33 @@ public class Company {
     }
 
     public void showDepartmentRecord(){
+        /*
+         * 功能描述: 展示部门打卡信息
+         * @Param: []
+         * @Return: void
+         */
         for(Department department : this.departments){
             department.showClockInfo();
         }
     }
 
     public void transmit(ClockInfo clockInfo){
+        /*
+         * 功能描述: 给部门传递消息
+         * @Param: [clockInfo]
+         * @Return: void
+         */
         for(Department department : this.departments){
             department.addClockInfo(clockInfo);
         }
     }
 
     public void addDepartment(Department department){
+        /*
+         * 功能描述: 添加部门
+         * @Param: [department]
+         * @Return: void
+         */
         this.departments.add(department);
     }
 
@@ -423,6 +445,11 @@ public class Company {
         bufferedReader.close();//关闭文件
     }
     private synchronized static void ini() throws IOException, ParseException {
+        /*
+         * 功能描述: synchronized同步,保证线程安全
+         * @Param: []
+         * @Return: void
+         */
         if(company == null){
             company = new Company();
         }

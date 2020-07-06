@@ -91,11 +91,18 @@ public class Main {
                 System.out.println("请输入员工ID和姓名,例如:B666_轩轩");
                 String s = stdIn.readLine();
                 StringTokenizer stringTokenizer = new StringTokenizer(s,"_");
-//                Employee employee = new Employee(stringTokenizer.nextToken(),stringTokenizer.nextToken());
-                String id = stringTokenizer.nextToken();
-                company.addEmployee(EmployeeFactory.create(1, id,stringTokenizer.nextToken()));
-                company.writeEmployee(company.search(id));
-                System.out.println("注册成功,初始密码为123456,为了账户的安全请您尽快修改密码!");
+                if(stringTokenizer.countTokens() == 2) {
+                    String id = stringTokenizer.nextToken();
+                    if(company.search(id) != null){
+                        System.err.println("该ID已存在,注册员工失败!");
+                    }else {
+                        company.addEmployee(EmployeeFactory.create(1, id, stringTokenizer.nextToken()));
+                        company.writeEmployee(company.search(id));
+                        System.out.println("注册成功,初始密码为123456,为了账户的安全请您尽快修改密码!");
+                    }
+                }else {
+                    System.err.println("输入格式错误,注册失败!");
+                }
             }else if(choice == 6){
                 System.out.println("请输入要删除的员工ID");
                 String id = stdIn.readLine();
