@@ -1,10 +1,7 @@
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /**
  * @author: yqw
@@ -12,14 +9,33 @@ import java.util.StringTokenizer;
  * @description: 容器类
  */
 public class Company {
-    private static BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-    private HashSet<Employee> allEmployee;
-    private ArrayList<ClockInfo> allInfo;
-    private int in_hour, in_minute;
-    private int back_hour, back_minute;
+    private List<Department> departments;
 
-    Company() throws IOException, ParseException {
-        this.allEmployee = new HashSet<Employee>();
+    private static BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+    private HashSet<Staff> allEmployee;
+    private ArrayList<ClockInfo> allInfo;
+    private int ini_inTime, ini_backTime;
+    public static Company company = null;
+
+
+    public static Company getInstance() throws IOException, ParseException {
+        /*
+         * 功能描述: 单例模式
+         * @Param: []
+         * @Return: Company
+         */
+        if (company == null){
+            company = new Company();
+        }
+        return company;
+    }
+
+    private Company() throws IOException, ParseException {
+        this.departments = new LinkedList<Department>();
+        this.addDepartment(new Logistics());
+        this.addDepartment(new Human());
+
+        this.allEmployee = new HashSet<Staff>();
         this.allInfo = new ArrayList<ClockInfo>();
         init();
     }
@@ -32,11 +48,11 @@ public class Company {
          */
         System.out.println("历史记录");
         //遍历所有员工
-        for(Employee employee : allEmployee){
+        for(Staff staff : allEmployee){
             //取得个人的打卡信息集合
-            ArrayList<ClockInfo> arrayList = this.onlyEmployee(employee.getId());
+            ArrayList<ClockInfo> arrayList = this.onlyEmployee(staff.getId());
             if(arrayList != null){
-                System.out.println(employee.getName()+","+employee.getId());
+                System.out.println(staff.getName()+","+staff.getId());
                 for(ClockInfo clockInfo : arrayList){
                     System.out.println(" "+ clockInfo);
                 }
@@ -55,8 +71,8 @@ public class Company {
         if (arrayList == null){
             System.err.println("无此ID员工");
         }else {
-            Employee employee = search(id);
-            System.out.println(employee.getName()+","+employee.getId());
+            Staff staff = search(id);
+            System.out.println(staff.getName()+","+staff.getId());
             for(ClockInfo clockInfo : arrayList){
                 System.out.println(" "+ clockInfo);
             }
@@ -70,12 +86,12 @@ public class Company {
          * @Return: void
          */
         System.out.println("今日情况");
-        for(Employee employee : allEmployee){
+        for(Staff staff : allEmployee){
             int flag = 0;
             for(ClockInfo d : allInfo){
-                if(d.getId().equals(employee.getId()) && d.getIn().getDate()==new Date().getDate() &&
+                if(d.getId().equals(staff.getId()) && d.getIn().getDate()==new Date().getDate() &&
                         d.getIn().getMonth() == new Date().getMonth() && d.getIn().getYear()== new Date().getYear()){
-                    System.out.print(employee.getName()+"--签到:"+d.getIn());
+                    System.out.print(staff.getName()+"--签到:"+d.getIn());
                     if(d.getBack()==null){
                         System.out.println(",签退:未完成");
                     }else {
@@ -89,7 +105,7 @@ public class Company {
             if (flag == 1){
                 continue;
             }
-            System.out.println(employee.getName()+"--签到:未完成,签退:未完成");
+            System.out.println(staff.getName()+"--签到:未完成,签退:未完成");
         }
     }
 
@@ -100,7 +116,9 @@ public class Company {
          * @Return: void
          * @throws: FileNotFoundException
          */
+        Date date = new Date();
         ArrayList<ClockInfo> onePersonInfos = this.onlyEmployee(id);
+
         if(onePersonInfos == null){
             if(search(id)==null){
                 System.err.println("无此ID员工");
@@ -113,11 +131,19 @@ public class Company {
                         && d.getIn().getYear()== new Date().getYear()){
                     if(d.getBack() == null){
                         d.setBack();//调用签退方法
+                        if (Integer.parseInt(d.getBack().getHours()+""+d.getBack().getMinutes()) >= ini_backTime &&
+                                Integer.parseInt(d.getIn().getHours()+""+d.getIn().getMinutes()) <= ini_inTime) {
+                            this.transmit(d);
+                        }
                         System.out.println("卡号："+id+",签退成功! "+d.getBack());
                     }else {
                         if(new Date().getTime()-d.getBack().getTime()>60000){
                             //判断两次打卡时间间隔是否小于一分钟
                             d.setBack();//调用签退方法
+                            if (Integer.parseInt(d.getBack().getHours()+""+d.getBack().getMinutes()) >= ini_backTime &&
+                                    Integer.parseInt(d.getIn().getHours()+""+d.getIn().getMinutes()) <= ini_inTime) {
+                                this.transmit(d);
+                            }
                             System.out.println("卡号："+id+",签退成功! "+d.getBack());
                         }else {
                             System.out.println("与上次打卡时间小于一分钟，请不要打卡过于频繁!");
@@ -144,7 +170,7 @@ public class Company {
             if(search(id) != null) {
                 clockInfo.setIn();//调用签到方法
                 allInfo.add(clockInfo);//打卡信息加入信息集合
-                search(id).addCount();
+//                search(id).addCount();
                 System.out.println("卡号："+id+",打卡成功!"+ clockInfo.getIn());
             }else {
                 System.err.println("无此ID员工");
@@ -160,7 +186,7 @@ public class Company {
             }
             clockInfo.setIn();//调用签到方法
             allInfo.add(clockInfo);//打卡信息加入信息集合
-            search(id).addCount();
+//            search(id).addCount();
             System.out.println("卡号："+id+",打卡成功!"+ clockInfo.getIn());
         }
     }
@@ -208,16 +234,16 @@ public class Company {
         }
     }
 
-    public void addEmployee(Employee employee) {
+    public void addEmployee(Staff staff) {
         /*
          * 功能描述: 添加员工，加入公司员工集合
          * @Param: [employee]
          * @Return: void
          */
-        this.allEmployee.add(employee);
+        this.allEmployee.add(staff);
     }
 
-    public void writeEmployee(Employee employee) throws FileNotFoundException {
+    public void writeEmployee(Staff staff) throws FileNotFoundException {
         /*
          * 功能描述: 添加员工，写入储存员工的文件
          * @Param: [employee]
@@ -226,20 +252,20 @@ public class Company {
          */
         PrintWriter printWriter = new PrintWriter(
                 new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/employees.dat",true))));
-        printWriter.println(employee.getId()+"_"+employee.getName()+"_"+employee.getPassword());//以"_"分隔
+        printWriter.println(staff.getId()+"_"+staff.getName()+"_"+staff.getPassword());//以"_"分隔
         printWriter.close();
     }
 
-    public void removeEmployee(Employee employee){
+    public void removeEmployee(Staff staff){
         /*
          * 功能描述: 从公司删除员工，从员工集合中的删除
          * @Param: [employee]
          * @Return: void
          */
-        this.allEmployee.remove(employee);
+        this.allEmployee.remove(staff);
     }
 
-    public void deleteEmployee(Employee employee) throws IOException {
+    public void deleteEmployee(Staff staff) throws IOException {
         /*
          * 功能描述: 从公司删除员工，删除储存员工文件中的信息
          * @Param: [employee]
@@ -255,7 +281,7 @@ public class Company {
         //将文件内容除了要删除的部分写入一个临时文件,以达到删除特定内容的目的
         String s = bufferedReader.readLine();
         while (s != null){
-            if (s.startsWith(employee.getId())){
+            if (s.startsWith(staff.getId())){
                 //如果这行信息是要删除的内容，则break,不写入临时文件
                 break;
             }
@@ -283,16 +309,16 @@ public class Company {
         }
     }
 
-    public Employee search(String id){
+    public Staff search(String id){
         /*
          * 功能描述: 查找员工
          * @Param: [void]
          * @Return: Employee
          */
-        for(Employee employee : allEmployee){
+        for(Staff staff : allEmployee){
             //遍历所有员工
-            if (employee.getId().equals(id))
-                return employee;
+            if (staff.getId().equals(id))
+                return staff;
         }
         return null;
     }
@@ -303,11 +329,28 @@ public class Company {
          * @Param: [void]
          * @Return: void
          */
-        for(Employee employee : allEmployee) {
+        for(Staff staff : allEmployee) {
             //遍历所有员工
-            System.out.println(employee);
+            System.out.println(staff);
         }
     }
+
+    public void showDepartmentRecord(){
+        for(Department department : this.departments){
+            department.showClockInfo();
+        }
+    }
+
+    public void transmit(ClockInfo clockInfo){
+        for(Department department : this.departments){
+            department.addClockInfo(clockInfo);
+        }
+    }
+
+    public void addDepartment(Department department){
+        this.departments.add(department);
+    }
+
     public void init() throws IOException, ParseException {
         /*
          * 功能描述: 公司初始化，设置公司最迟签到时间和最早签退时间，将员工信息从文件录入
@@ -315,17 +358,15 @@ public class Company {
          * @Return: void
          * @throws: IOException, ParseException
          */
-//        System.out.println("设置公司最迟签到时间,格式为: hour:minute");
-//        String s = stdIn.readLine();
-//        StringTokenizer sTokenizer = new StringTokenizer(s, ":");
-//        this.in_hour = Integer.parseInt(sTokenizer.nextToken());
-//        this.in_minute = Integer.parseInt(sTokenizer.nextToken());
-//
-//        System.out.println("设置公司最早签退时间,格式为: hour:minute");
-//        s = stdIn.readLine();
-//        sTokenizer = new StringTokenizer(s, ":");
-//        this.back_hour = Integer.parseInt(sTokenizer.nextToken());
-//        this.back_minute = Integer.parseInt(sTokenizer.nextToken());
+        System.out.println("设置公司最迟签到时间,格式为: hh:mm");
+        String s = stdIn.readLine();
+        s = s.replace(":","");
+        this.ini_inTime = Integer.parseInt(s);
+
+        System.out.println("设置公司最早签退时间,格式为: hh:mm");
+        s = stdIn.readLine();
+        s = s.replace(":","");
+        this.ini_backTime = Integer.parseInt(s);
 
         BufferedReader bufferedReader = new BufferedReader(
                 new InputStreamReader(new FileInputStream("data/employees.dat")));
@@ -336,7 +377,7 @@ public class Company {
             StringTokenizer stringTokenizer = new StringTokenizer(line, "_");
             if (stringTokenizer.countTokens()==3) {
                 this.addEmployee(
-                        new Employee(stringTokenizer.nextToken(), stringTokenizer.nextToken(),stringTokenizer.nextToken()));
+                        EmployeeFactory.create(1, stringTokenizer.nextToken(), stringTokenizer.nextToken(), stringTokenizer.nextToken()));
                 line = bufferedReader.readLine();
             }else {
                 System.err.println("初始化失败,数据格式错误!");

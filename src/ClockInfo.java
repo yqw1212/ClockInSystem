@@ -29,7 +29,7 @@ public class ClockInfo {
     }
 
     public String toString() {
-        /**
+        /*
          * 功能描述: 以字符串形式返回打卡信息
          * @Param: [void]
          * @Return: java.lang.String

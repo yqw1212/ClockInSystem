@@ -26,7 +26,7 @@ public class Main {
     }
 
     Main() throws IOException, InterruptedException, ParseException {
-        this.company = new Company();
+        this.company = Company.getInstance();
         run();
     }
 
@@ -91,9 +91,10 @@ public class Main {
                 System.out.println("请输入员工ID和姓名,例如:B666_轩轩");
                 String s = stdIn.readLine();
                 StringTokenizer stringTokenizer = new StringTokenizer(s,"_");
-                Employee employee = new Employee(stringTokenizer.nextToken(),stringTokenizer.nextToken());
-                company.addEmployee(employee);
-                company.writeEmployee(employee);
+//                Employee employee = new Employee(stringTokenizer.nextToken(),stringTokenizer.nextToken());
+                String id = stringTokenizer.nextToken();
+                company.addEmployee(EmployeeFactory.create(1, id,stringTokenizer.nextToken()));
+                company.writeEmployee(company.search(id));
                 System.out.println("注册成功,初始密码为123456,为了账户的安全请您尽快修改密码!");
             }else if(choice == 6){
                 System.out.println("请输入要删除的员工ID");
@@ -109,14 +110,16 @@ public class Main {
                 if (company.logIn(id,password)){
                     System.out.println("请输入新密码:");
                     String code = stdIn.readLine();
-                    Employee employee = company.search(id);
-                    company.deleteEmployee(employee);//删除旧员工信息
-                    employee.setPassword(code);
-                    company.writeEmployee(employee);//添加新员工信息
+                    Staff staff = company.search(id);
+                    company.deleteEmployee(staff);//删除旧员工信息
+                    staff.setPassword(code);
+                    company.writeEmployee(staff);//添加新员工信息
                     System.out.println("密码修改成功!");
                 }else {
                     System.out.println("密码修改失败!");
                 }
+            }else if(choice == 8){
+                this.company.showDepartmentRecord();
             }
 
             Thread.sleep(300);
@@ -141,8 +144,9 @@ public class Main {
             stdErr.println("[5]-----------注册员工");
             stdErr.println("[6]-----------删除员工");
             stdErr.println("[7]-----------修改密码");
+            stdErr.println("[8]-----------后勤人事记录");
             in = Integer.parseInt(stdIn.readLine());
-            if (in >= 0 && in <= 7) {
+            if (in >= 0 && in <= 8) {
                 break;
             } else {
                 stdErr.println("Invalid choice: " + in);
