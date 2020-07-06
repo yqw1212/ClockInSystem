@@ -44,7 +44,7 @@ public class Human implements Department {
          * @Return: void
          */
         for (ClockInfo clockInfo : allInfo){
-            System.out.println(clockInfo);
+            System.out.println("ID:"+clockInfo.getId()+clockInfo);
         }
     }
 }

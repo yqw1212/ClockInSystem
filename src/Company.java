@@ -138,19 +138,24 @@ public class Company {
                         && d.getIn().getYear()== new Date().getYear()){
                     if(d.getBack() == null){
                         d.setBack();//调用签退方法
-                        if (Integer.parseInt(d.getBack().getHours()+""+d.getBack().getMinutes()) >= ini_backTime &&
-                                Integer.parseInt(d.getIn().getHours()+""+d.getIn().getMinutes()) <= ini_inTime) {
-                            this.transmit(d);
-                        }
                         System.out.println("卡号："+id+",签退成功! "+d.getBack());
+                        if (Integer.parseInt(d.getBack().getHours()+""+d.getBack().getMinutes()) >= ini_backTime ) {
+                            this.transmit(d);
+                        }else {
+                            int minutes = ini_backTime-Integer.parseInt(d.getBack().getHours()+""+d.getBack().getMinutes());
+                            System.out.println("您已早退" + minutes/60 + "小时" + minutes%60 + "分钟");
+                        }
                     }else {
                         if(new Date().getTime()-d.getBack().getTime()>60000){
                             //判断两次打卡时间间隔是否小于一分钟
                             d.setBack();//调用签退方法
+                            System.out.println("卡号："+id+",签退成功! "+d.getBack());
                             if (Integer.parseInt(d.getBack().getHours()+""+d.getBack().getMinutes()) >= ini_backTime){
                                 this.transmit(d);
+                            }else {
+                                int minutes = ini_backTime-Integer.parseInt(d.getBack().getHours()+""+d.getBack().getMinutes());
+                                System.out.println("您已早退" + minutes/60 + "小时" + minutes%60 + "分钟");
                             }
-                            System.out.println("卡号："+id+",签退成功! "+d.getBack());
                         }else {
                             System.out.println("与上次打卡时间小于一分钟，请不要打卡过于频繁!");
                         }
@@ -177,10 +182,13 @@ public class Company {
                 clockInfo.setIn();//调用签到方法
                 allInfo.add(clockInfo);//打卡信息加入信息集合
 //                search(id).addCount();
+                System.out.println("卡号："+id+",打卡成功!"+ clockInfo.getIn());
                 if(Integer.parseInt(clockInfo.getIn().getHours()+""+clockInfo.getIn().getMinutes()) <= ini_inTime){
                     transmit(clockInfo);
+                }else{
+                    int minutes = Integer.parseInt(clockInfo.getIn().getHours()+""+clockInfo.getIn().getMinutes())-ini_inTime;
+                    System.out.println("您已迟到" + minutes/60 + "小时" + minutes%60 + "分钟");
                 }
-                System.out.println("卡号："+id+",打卡成功!"+ clockInfo.getIn());
             }else {
                 System.err.println("无此ID员工");
             }
@@ -196,7 +204,13 @@ public class Company {
             clockInfo.setIn();//调用签到方法
             allInfo.add(clockInfo);//打卡信息加入信息集合
 //            search(id).addCount();
-            System.out.println("卡号："+id+",打卡成功!"+ clockInfo.getIn());
+            System.out.println("卡号：" + id + ",打卡成功!" + clockInfo.getIn());
+            if(Integer.parseInt(clockInfo.getIn().getHours()+""+clockInfo.getIn().getMinutes()) <= ini_inTime){
+                transmit(clockInfo);
+            }else{
+                int minutes = Integer.parseInt(clockInfo.getIn().getHours()+""+clockInfo.getIn().getMinutes())-ini_inTime;
+                System.out.println("您已迟到" + minutes/60 + "小时" + minutes%60 + "分钟");
+            }
         }
     }
 
