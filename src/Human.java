@@ -19,7 +19,21 @@ public class Human implements Department {
          * @Param: [clockInfo]
          * @Return: void
          */
-        this.allInfo.add(clockInfo);
+        if (this.allInfo.size() == 0){
+            this.allInfo.add(clockInfo);
+        }else {
+            if(clockInfo.getBack() == null){
+                this.allInfo.add(clockInfo);
+            }else {
+                //传来的打卡信息是签退信息
+                for (ClockInfo c : this.allInfo) {
+                    if (c.getId().equals(clockInfo.getId()) && c.getIn().getTime() == clockInfo.getIn().getTime()) {
+                        c = clockInfo;
+                    }
+                }
+            }
+        }
+        System.out.println("人事部收到");
     }
 
     @Override

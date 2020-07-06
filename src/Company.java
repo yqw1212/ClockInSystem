@@ -147,8 +147,7 @@ public class Company {
                         if(new Date().getTime()-d.getBack().getTime()>60000){
                             //判断两次打卡时间间隔是否小于一分钟
                             d.setBack();//调用签退方法
-                            if (Integer.parseInt(d.getBack().getHours()+""+d.getBack().getMinutes()) >= ini_backTime &&
-                                    Integer.parseInt(d.getIn().getHours()+""+d.getIn().getMinutes()) <= ini_inTime) {
+                            if (Integer.parseInt(d.getBack().getHours()+""+d.getBack().getMinutes()) >= ini_backTime){
                                 this.transmit(d);
                             }
                             System.out.println("卡号："+id+",签退成功! "+d.getBack());
@@ -178,6 +177,9 @@ public class Company {
                 clockInfo.setIn();//调用签到方法
                 allInfo.add(clockInfo);//打卡信息加入信息集合
 //                search(id).addCount();
+                if(Integer.parseInt(clockInfo.getIn().getHours()+""+clockInfo.getIn().getMinutes()) <= ini_inTime){
+                    transmit(clockInfo);
+                }
                 System.out.println("卡号："+id+",打卡成功!"+ clockInfo.getIn());
             }else {
                 System.err.println("无此ID员工");
